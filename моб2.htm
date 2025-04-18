@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Музыкальные инструменты</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #000000, #434343);
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      margin-bottom: 40px;
+    }
+    button {
+      margin: 10px;
+      padding: 15px 25px;
+      font-size: 18px;
+      border-radius: 10px;
+      border: none;
+      background-color: #FFD700;
+      color: #000000;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+    button:hover {
+      background-color: #e6c200;
+      transform: scale(1.05);
+    }
+    .marquee {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #222;
+      color: #FFD700;
+      padding: 10px 0;
+      font-size: 16px;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .marquee span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll-text 10s linear infinite;
+    }
+    @keyframes scroll-text {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Нажми на инструмент</h1>
+
+  <button onclick="toggleSound('piano')">🎹 Пианино</button>
+  <button onclick="toggleSound('guitar')">🎸 Гитара</button>
+  <button onclick="toggleSound('dombra')">🎼 Домбра</button>
+  <button onclick="toggleSound('trumpet')">🎺 Труба</button>
+  <button onclick="toggleSound('violin')">🎻 Скрипка</button>
+  <button onclick="toggleSound('drum')">🥁 Барабан</button>
+
+  <!-- Аудио файлы -->
+  <audio id="piano" src="piano.mp3"></audio>
+  <audio id="guitar" src="guitar.mp3"></audio>
+  <audio id="dombra" src="dombra.mp3"></audio>
+  <audio id="trumpet" src="trumpet.mp3"></audio>
+  <audio id="violin" src="violin.mp3"></audio>
+  <audio id="drum" src="drum.mp3"></audio>
+
+  <script>
+    let currentAudio = null;
+
+    function toggleSound(instrument) {
+      const sound = document.getElementById(instrument);
+      if (!sound) return;
+
+      if (currentAudio && currentAudio !== sound) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+      }
+
+      if (sound.paused) {
+        sound.currentTime = 0;
+        sound.play();
+        currentAudio = sound;
+      } else {
+        sound.pause();
+        sound.currentTime = 0;
+        currentAudio = null;
+      }
+    }
+  </script>
+
+  <!-- Бегущая строка -->
+  <div class="marquee">
+    <span>Сделано Кириллом</span>
+  </div>
+
+</body>
+</html>
+
+ 
